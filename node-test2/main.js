@@ -1,5 +1,10 @@
 window.jQuery = function(){}
-window.jQuery.ajax = function(url,method,body,successFn,failFn) {
+window.jQuery.ajax = function(options) {
+    let url = options.url
+    let method = options.method
+    let body = options.body
+    let successFn = options.successFn
+    let failFn = options.failFn
     let request = new XMLHttpRequest()
     request.onreadystatechange = () => {
         if (request.readyState === 4) {
@@ -14,12 +19,13 @@ window.jQuery.ajax = function(url,method,body,successFn,failFn) {
     request.send(body)
 }
  
-window.$ = window.jQuery
  myButton.addEventListener('click',(e)=>{
-    $.ajax('/xxx',
-    'POST',
-    'PASS',
-    (responseText)=>{console.log('1')},
-    (request) =>{console.log('2')}
-    )
+     let obj = {
+         url:'/xxx',
+         method:'get',
+         body:'hi',
+         successFn:()=>{},
+         failFn:()=>{}
+     }
+     window.jQuery.ajax(obj)
  })
